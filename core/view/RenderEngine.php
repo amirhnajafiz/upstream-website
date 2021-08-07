@@ -6,6 +6,12 @@ use mvc\core\App;
 
 class RenderEngine
 {
+    // Private fields
+    private static string $BASE = "layouts/";
+    private static string $LAYOUT_ADD = "main";
+    private static string $HEADER_ADD = "header";
+    private static string $FOOTER_ADD = "footer";
+
     /**
      * Render view gets a callback with parameters, and renders the pages 
      * for us.
@@ -15,19 +21,18 @@ class RenderEngine
      */
     public static function renderView($view, $params = [])
     {
-        $layout = self::loadView("layouts/main");
-        $header = self::loadView("layouts/header");
-        $footer = self::loadView("layouts/footer");
-        $layout = str_replace("{{navbar}}", $header, $layout);
-        $layout = str_replace("{{footer}}", $footer, $layout);
-        $view = self::loadView($view, $params);
-        return str_replace("{{content}}", $view, $layout);
+        $layout = self::loadView(self::$BASE . self::$LAYOUT_ADD);
+        $layout = str_replace("{{navbar}}", self::loadView(self::$BASE . self::$HEADER_ADD), $layout);
+        $layout = str_replace("{{footer}}", self::loadView(self::$BASE . self::$FOOTER_ADD), $layout);
+        return str_replace("{{content}}", self::loadView($view, $params), $layout);
     }
 
     /**
      * This method loads the view that we give to it, with its
      * parameters.
      * 
+     * @param view is the address of that view
+     * @param params is the view parameters
      */
     private static function loadView($view, $params = []) 
     {
