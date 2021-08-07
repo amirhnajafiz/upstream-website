@@ -1,4 +1,7 @@
 <?php
+
+  use mvc\core\auth\Auth;
+
   $URI = $_SERVER['REQUEST_URI'];
   $pos = strpos("?", $URI);
   $URI = $pos === FALSE ? $URI : substr($URI, 0, $pos);
@@ -11,12 +14,21 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link <?php if ($URI == "/login") echo $current_span; ?>" href="/login">Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link <?php if ($URI == "/sign_up") echo $current_span; ?>" href="/sign_up">Register</a>
-      </li>
+      <?php if(!Auth::checkUser()) { ?>
+        <li class="nav-item">
+          <a class="nav-link <?php if ($URI == "/login") echo $current_span; ?>" href="/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <?php if ($URI == "/sign_up") echo $current_span; ?>" href="/sign_up">Register</a>
+        </li>
+      <?php } else { ?>
+        <li class="nav-item">
+          <a class="nav-link <?php if ($URI == "/dashboard") echo $current_span; ?>" href="/dashboard">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link bg-danger text-light rounded" href="/logout">Logout</a>
+        </li>
+      <?php } ?>
       <li class="nav-item">
         <a class="nav-link <?php if ($URI == "/upload") echo $current_span; ?>" href="/upload">Upload</a>
       </li>
