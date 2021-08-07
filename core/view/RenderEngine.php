@@ -15,12 +15,12 @@ class RenderEngine
      */
     public static function renderView($view, $params = [])
     {
-        $layout = $this->loadView("layouts/main");
-        $header = $this->loadView("layouts/header");
-        $footer = $this->loadView("layouts/footer");
+        $layout = self::loadView("layouts/main");
+        $header = self::loadView("layouts/header");
+        $footer = self::loadView("layouts/footer");
         $layout = str_replace("{{navbar}}", $header, $layout);
         $layout = str_replace("{{footer}}", $footer, $layout);
-        $view = $this->loadView($view, $params);
+        $view = self::loadView($view, $params);
         return str_replace("{{content}}", $view, $layout);
     }
 
@@ -29,7 +29,7 @@ class RenderEngine
      * parameters.
      * 
      */
-    protected function loadView($view, $params = []) 
+    private static function loadView($view, $params = []) 
     {
         foreach ($params as $key => $value) 
         {
