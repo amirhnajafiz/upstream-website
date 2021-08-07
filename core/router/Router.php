@@ -5,6 +5,7 @@ namespace mvc\core\router;
 use mvc\core\App;
 use mvc\core\Request;
 use mvc\core\Response;
+use mvc\core\view\RenderEngine;
 
 /**
  * The router class, manages the routes of our website
@@ -76,7 +77,7 @@ class Router
         }
 
         if (is_string($callback)) {
-            return $this->renderView($callback);
+            return RenderEngine::renderView($callback);
         }
 
         if (is_array($callback)) {
@@ -84,83 +85,6 @@ class Router
         }
 
         return call_user_func($callback, $this->request);
-    }
-
-    /**
-     * Render view gets a callback with parameters, and renders the pages 
-     * for us.
-     * 
-     * @param callback is the function to be executed
-     * @param params is the parameters of the request
-     */
-    public function renderView($view, $params = [])
-    {
-        $layout = $this->loadLayout();
-        $header = $this->loadHeader();
-        $footer = $this->loadFooter();
-        $layout = str_replace("{{navbar}}", $header, $layout);
-        $layout = str_replace("{{footer}}", $footer, $layout);
-        $view = $this->loadView($view, $params);
-        return str_replace("{{content}}", $view, $layout);
-    }
-
-    /**
-     * This method loads the view that we give to it, with its
-     * parameters.
-     * 
-     */
-    protected function loadView($view, $params = []) 
-    {
-        foreach ($params as $key => $value) 
-        {
-            $$key = $value;
-        }
-        ob_start();
-        include_once App::$ROOT . "/view/" . $view . ".php";
-        return ob_get_clean();
-    }
-
-    /**
-     * This method renders the header of the website.
-     * 
-     * @param params is the parameters given to the header
-     */
-    protected function loadHeader($params = [])
-    {
-        foreach ($params as $key => $value) 
-        {
-            $$key = $value;
-        }
-        ob_start();
-        include_once App::$ROOT . "/view/layouts/header.php";
-        return ob_get_clean();
-    }
-
-    /**
-     * This method loads the footer of the website.
-     * 
-     * @param params the parameters given to footer
-     */
-    protected function loadFooter($params = [])
-    {
-        foreach ($params as $key => $value) 
-        {
-            $$key = $value;
-        }
-        ob_start();
-        include_once App::$ROOT . "/view/layouts/footer.php";
-        return ob_get_clean();
-    }
-
-    /**
-     * This method loads the bootstrap layout for our pages.
-     * 
-     */
-    protected function loadLayout() 
-    {
-        ob_start();
-        include_once App::$ROOT . "/view/layouts/main.php";
-        return ob_get_clean();
     }
 }
 
