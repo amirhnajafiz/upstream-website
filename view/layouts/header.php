@@ -25,13 +25,15 @@
         <li class="nav-item">
           <a class="nav-link <?php if ($URI == "/dashboard") echo $current_span; ?>" href="/dashboard">Dashboard</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link bg-danger text-light rounded" href="/logout">Logout</a>
-        </li>
       <?php } ?>
       <li class="nav-item">
         <a class="nav-link <?php if ($URI == "/upload") echo $current_span; ?>" href="/upload">Upload</a>
       </li>
+      <?php if(Auth::checkUser()) { ?>
+        <li class="nav-item">
+          <a class="nav-link bg-danger text-light rounded mx-3" href="/logout">Logout</a>
+        </li>
+      <?php } ?>
     </ul>
   </div>
 </nav>
