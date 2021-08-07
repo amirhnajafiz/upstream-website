@@ -4,6 +4,7 @@ namespace mvc\core\router;
 
 use mvc\core\App;
 use mvc\controller\UserController;
+use mvc\controller\LoginController;
 
 class Routes
 {
@@ -18,7 +19,8 @@ class Routes
         $app->router->get('/upload', 'fileUpload');
 
         // User routes
-        $app->router->post('/dashboard', [UserController::class, 'index']);
+        $app->router->post('/login', [LoginController::class, 'login']);
+        $app->router->get('/dashboard', [UserController::class, 'index']);
         $app->router->post('/upload', [UserController::class, 'upload']);
     }
 }

@@ -3,11 +3,13 @@
 namespace mvc\controller;
 
 use mvc\controller\BaseController;
+use mvc\core\auth\Auth;
 
-class LoginHandler extends BaseController
+class LoginController extends BaseController
 {
     public function login() {
-        # Do login
+        Auth::checkIn("Amirhossein");
+        header("Location: /dashboard");
     }
 
     public function sign_up() {

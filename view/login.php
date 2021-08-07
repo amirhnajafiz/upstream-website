@@ -1,5 +1,5 @@
 <h4 class="my-4">Welcome to login page</h4>
-<form action="/dashboard" method="POST">
+<form action="/login" method="POST">
   <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
