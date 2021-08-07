@@ -3,9 +3,9 @@
 namespace mvc\core;
 
 use mvc\core\Request;
-use mvc\core\Router;
+use mvc\core\router\Router;
 use mvc\core\Response;
-use mvc\core\Routes;
+use mvc\core\router\Routes;
 
 /**
  * App class is the main class of our website, where

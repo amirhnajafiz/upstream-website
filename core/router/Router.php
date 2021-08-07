@@ -1,6 +1,10 @@
 <?php
 
-namespace mvc\core;
+namespace mvc\core\router;
+
+use mvc\core\App;
+use mvc\core\Request;
+use mvc\core\Response;
 
 /**
  * The router class, manages the routes of our website

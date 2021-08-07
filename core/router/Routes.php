@@ -1,6 +1,6 @@
 <?php
 
-namespace mvc\core;
+namespace mvc\core\router;
 
 use mvc\core\App;
 use mvc\controller\UserController;
