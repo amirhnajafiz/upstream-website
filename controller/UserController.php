@@ -15,7 +15,7 @@ class UserController extends BaseController
     }
 
     public function upload() {
-        return $this->render("userFileUpload", ['name' => 'User']);
+        return $this->render("userFileUpload", ['name' => Auth::getUserName()]);
     }
 }
 

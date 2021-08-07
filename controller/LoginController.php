@@ -7,8 +7,9 @@ use mvc\core\auth\Auth;
 
 class LoginController extends BaseController
 {
-    public function login() {
-        Auth::checkIn("Amirhossein");
+    public function login($request) {
+        $data = $request->getBody();
+        Auth::checkIn($data['username']);
         header("Location: /dashboard");
     }
 
