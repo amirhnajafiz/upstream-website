@@ -6,8 +6,17 @@ use mvc\core\App;
 use mvc\controller\UserController;
 use mvc\controller\LoginController;
 
+/**
+ * Routes class is the class for managing the routes of our
+ * website.
+ * 
+ */
 class Routes
 {
+    /**
+     * This method generates the routes of our website.
+     * 
+     */
     public static function getRoutes()
     {
         $app = App::get_instance();

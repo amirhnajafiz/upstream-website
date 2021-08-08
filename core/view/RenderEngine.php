@@ -4,6 +4,10 @@ namespace mvc\core\view;
 
 use mvc\core\App;
 
+/**
+ * RenderEngine is the class that does the rendring and viewing stuff.
+ * 
+ */
 class RenderEngine
 {
     // Private fields
