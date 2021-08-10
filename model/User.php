@@ -4,13 +4,14 @@ namespace mvc\model;
 
 use mvc\model\Model;
 
+/**
+ * User model is the user schema in our database.
+ * 
+ */
 class User extends Model 
 {
+    // Singleton instance
     private static User $user;
-    private string $name;
-    private string $password;
-    private int $isAdmin;
-    private int $canConfirm; 
 
     private function __construct(PDO $pdo, string $table_name)
     {
@@ -18,6 +19,12 @@ class User extends Model
         $this->table_name = $table_name;
     }
 
+    /**
+     * This method initialize the User model.
+     * 
+     * @param pdo is the database connector
+     * @param table_name is the name of this model table in our database
+     */
     public function Do(PDO $pdo, string $table_name) {
         if (!isset(self::$user)) {
             self::$user = new User($pdo, $table_name);
@@ -40,7 +47,6 @@ class User extends Model
     public function select() {
         // Select query
     }
-
 }
 
 ?>
