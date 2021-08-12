@@ -3,6 +3,7 @@
 namespace mvc\controller;
 
 use mvc\controller\BaseController;
+use mvc\controller\AuthController;
 use mvc\core\auth\Auth;
 
 /**
@@ -38,7 +39,8 @@ class UserController extends BaseController
      */
     public function login($request) {
         $data = $request->getBody();
-        Auth::checkIn($data['username']);
+        $valid_result = AuthController::dataValidation($data['username']);
+        Auth::checkIn($valid_result['data']);
         header("Location: /dashboard");
     }
 
