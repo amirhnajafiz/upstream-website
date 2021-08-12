@@ -5,6 +5,7 @@ namespace mvc\controller;
 use mvc\controller\BaseController;
 use mvc\controller\AuthController;
 use mvc\core\auth\Auth;
+use mvc\core\Error;
 
 /**
  * UserController manages the endpoints and actions
@@ -39,7 +40,13 @@ class UserController extends BaseController
      */
     public function login($request) {
         $data = $request->getBody();
+
         $valid_result = AuthController::dataValidation($data['username']);
+        foreach($valid_result['violations'] as $message)
+        {
+            Error::setError($message);
+        }
+        
         Auth::checkIn($valid_result['data']);
         header("Location: /dashboard");
     }
