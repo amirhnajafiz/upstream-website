@@ -10,6 +10,15 @@
   </head>
   <body class="d-flex flex-column min-vh-100">
       {{navbar}}
+      <?php if(isset($errors)) { ?>
+        <div class="w-100 d-flex">
+          <?php foreach($errors as $error) { ?>
+            <div class="alert alert-danger" role="alert">
+              <?php echo $error; ?>
+            </div>
+          <?php } ?>
+        </div>
+      <?php } ?>
       <div class="container">
         {{content}}
       </div>

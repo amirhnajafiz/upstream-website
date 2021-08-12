@@ -21,8 +21,10 @@ class UserController extends BaseController
     public function index() {
         if (Auth::checkUser())
             return $this->render("dashboard", ['name' => Auth::getUserName()]);
-        else 
+        else {
+            Error::setError("You must be logged in first");
             header("Location: /login"); 
+        }
     }
 
     /**
@@ -46,7 +48,7 @@ class UserController extends BaseController
         {
             Error::setError($message);
         }
-        
+
         Auth::checkIn($valid_result['data']);
         header("Location: /dashboard");
     }

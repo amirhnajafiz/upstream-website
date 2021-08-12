@@ -8,7 +8,7 @@ class Error
 
     public static function setError($message)
     {
-        self::$errors[] = $message;
+        array_push(self::$errors, $message);
     }
 
     public static function getErrors()

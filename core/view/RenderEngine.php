@@ -3,6 +3,7 @@
 namespace mvc\core\view;
 
 use mvc\core\App;
+use mvc\core\Error;
 
 /**
  * RenderEngine is the class that does the rendring and viewing stuff.
@@ -25,7 +26,7 @@ class RenderEngine
      */
     public static function renderView($view, $params = [])
     {
-        $layout = self::loadView(self::$BASE . self::$LAYOUT_ADD);
+        $layout = self::loadView(self::$BASE . self::$LAYOUT_ADD, ['errors' => Error::getErrors()]);
         $layout = str_replace("{{navbar}}", self::loadView(self::$BASE . self::$HEADER_ADD), $layout);
         $layout = str_replace("{{footer}}", self::loadView(self::$BASE . self::$FOOTER_ADD), $layout);
         return str_replace("{{content}}", self::loadView($view, $params), $layout);

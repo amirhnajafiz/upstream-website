@@ -6,6 +6,7 @@ use mvc\core\Request;
 use mvc\core\router\Router;
 use mvc\core\Response;
 use mvc\core\router\Routes;
+use mvc\core\Error;
 
 /**
  * App class is the main class of our website, where
