@@ -69,11 +69,7 @@ class Router
         if ($callback === false) {
             $code = 404;
             $this->response->setStatusCode($code);
-            $layout = $this->loadLayout();
-            $layout = str_replace("{{navbar}}", "", $layout);
-            $layout = str_replace("{{footer}}", "", $layout);
-            $view = $this->loadView("errors/_404", compact('code'));
-            return str_replace("{{content}}", $view, $layout);
+            return RenderEngine::renderView("errors/_404", compact('code'));
         }
 
         if (is_string($callback)) {
