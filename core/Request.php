@@ -39,7 +39,8 @@ class Request
         $URI = $_SERVER['REQUEST_URI'];
         $pos = strpos("?", $URI);
         $URI = $pos === FALSE ? $URI : substr($URI, 0, $pos);
-        return rtrim($URI, "/");
+        $URI = rtrim($URI, "/");
+        return $URI == "" ? "/" : $URI;
     }
 
     /**
