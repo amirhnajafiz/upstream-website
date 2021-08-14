@@ -30,7 +30,7 @@ class UserController extends BaseController
             return $this->render("dashboard", ['name' => Auth::getUserName()]);
         else {
             Message::addMessage("You must be logged in first.", Message::WARN);
-            header("Location: /login"); 
+            return $this->redirect("login", 307);
         }
     }
 

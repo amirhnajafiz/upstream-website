@@ -21,6 +21,11 @@ class BaseController
     {
         return RenderEngine::renderView($view, $params);
     }
+
+    public function redirect(string $path, int $code = 301) 
+    {
+        return Application::$app->response->redirect($path, $code);
+    }
 }
 
 ?>

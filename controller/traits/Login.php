@@ -21,9 +21,9 @@ trait Login
         if ($valid) {
             Auth::checkIn($data['username']);
             Message::addMessage("Logged in.", Message::OK);
-            header("Location: /dashboard");
+            return $this->redirect("dashboard");
         } else {
-            header("Location: /login");
+            return $this->redirect("login", 303);
         }
     }
 }
