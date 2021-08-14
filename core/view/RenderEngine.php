@@ -3,7 +3,7 @@
 namespace mvc\core\view;
 
 use mvc\core\App;
-use mvc\core\Error;
+use mvc\core\Message;
 
 /**
  * RenderEngine is the class that does the rendring and viewing stuff.
@@ -12,10 +12,7 @@ use mvc\core\Error;
 class RenderEngine
 {
     // Private fields
-    private static string $BASE = "layouts/";
-    private static string $LAYOUT_ADD = "main";
-    private static string $HEADER_ADD = "header";
-    private static string $FOOTER_ADD = "footer";
+    private static string $BASE = "layouts/main";
 
     /**
      * Render view gets a callback with parameters, and renders the pages 
@@ -26,10 +23,7 @@ class RenderEngine
      */
     public static function renderView($view, $params = [])
     {
-        $layout = self::loadView(self::$BASE . self::$LAYOUT_ADD, ['errors' => Error::getErrors()]);
-        $layout = str_replace("{{navbar}}", self::loadView(self::$BASE . self::$HEADER_ADD), $layout);
-        $layout = str_replace("{{footer}}", self::loadView(self::$BASE . self::$FOOTER_ADD), $layout);
-        return str_replace("{{content}}", self::loadView($view, $params), $layout);
+        return str_replace("{{content}}", self::loadView($view, $params), self::loadView(self::$BASE));
     }
 
     /**
@@ -45,6 +39,14 @@ class RenderEngine
         {
             $$key = $value;
         }
+
+        if (Message::check())
+        {
+            $message = Message::getMessage();
+            $type = Message::getType();
+            Message::clear();
+        }
+
         ob_start();
         include_once App::$ROOT . "/view/" . $view . ".php";
         return ob_get_clean();

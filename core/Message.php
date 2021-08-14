@@ -11,6 +11,11 @@ use mvc\utils\CookieHandler;
  */
 class Message
 {
+    // Private fields
+    const ERROR = "danger";
+    const OK = "success";
+    const WARN = "warning";
+
     /**
      * Check if there is a message.
      * 
@@ -27,7 +32,7 @@ class Message
      * @param content message body
      * @param type message type
      */
-    public static function addMessage($content = "", $type="error")
+    public static function addMessage($content = "", $type = "warning")
     {
         CookieHandler::set("message", $content, 3600);
         CookieHandler::set("type", $type, 3600);
