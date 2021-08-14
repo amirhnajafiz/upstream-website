@@ -56,6 +56,25 @@ class Router
     }
 
     /**
+     * This method gets the URL of a route
+     * based on its name.
+     * 
+     * @param name the route name
+     * @return URL the route paths
+     */
+    public function getURL($name) 
+    {
+        foreach($this->routes as $method) {
+            foreach($method as $route) {
+                if ($route->getName() == $name) {
+                    return $route->getPath();
+                }
+            }
+        }
+        return "/";
+    }
+
+    /**
      * This method gets the callback function of a route.
      * 
      * @param path the wanted route path
@@ -64,7 +83,7 @@ class Router
      */
     public function getCallBack($path, $method)
     {
-        foreach ($this->routes[$method] as $route) {
+        foreach($this->routes[$method] as $route) {
             if ($route->check($path)) {
                 return $route->getCallback();
             }
