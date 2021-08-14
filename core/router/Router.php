@@ -65,7 +65,7 @@ class Router
     public function getCallBack($path, $method)
     {
         foreach ($this->routes[$method] as $route) {
-            if ($route->getPath == $path) {
+            if ($route->check($path)) {
                 return $route->getCallback();
             }
         }

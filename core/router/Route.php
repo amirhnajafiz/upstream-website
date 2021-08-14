@@ -20,6 +20,12 @@ class Route
         return $this;
     }
 
+    public function check($path)
+    {
+        $pattern = "@^" . preg_replace('/\\\:[a-zA-Z0-9\_\-]+/', '([a-zA-Z0-9\-\_]+)', preg_quote($this->getPath())) . "$@D";
+        return preg_match($pattern, $path);
+    }
+
     public function getName()
     {
         return $this->name;
