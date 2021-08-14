@@ -5,6 +5,7 @@ namespace mvc\core\router;
 use mvc\core\App;
 use mvc\core\Request;
 use mvc\core\Response;
+use mvc\core\router\Route;
 use mvc\core\view\RenderEngine;
 
 /**
@@ -36,22 +37,39 @@ class Router
      * Get method handles the get requests to our website.
      * 
      * @param path is the path of the request
-     * @param callback is the function to be executed when the router engages
+     * @param Route created route object
      */
     public function get($path, $callback)
     {
-        $this->routes['get'][$path] = $callback;
+        return $this->routes['get'][] = new Route($path, $callback);
     }
 
     /**
      * Post method handles the post requests to our website.
      * 
      * @param path is the path of the request
-     * @param callback is the function to be executed when the router engages
+     * @param Route created route object
      */
     public function post($path, $callback)
     {
-        $this->routes['post'][$path] = $callback;
+        return $this->routes['post'][] = new Route($path, $callback);
+    }
+
+    /**
+     * This method gets the callback function of a route.
+     * 
+     * @param path the wanted route path
+     * @param method request method
+     * @return callback the route callback function
+     */
+    public function getCallBack($path, $method)
+    {
+        foreach ($this->routes[$method] as $route) {
+            if ($route->getPath == $path) {
+                return $route->getCallback();
+            }
+        }
+        return false;
     }
 
     /**
@@ -64,7 +82,7 @@ class Router
         $path = $this->request->getPath();
         $method = $this->request->getMethod();
         
-        $callback = $this->routes[$method][$path] ?? false;
+        $callback = $this->getCallBack($path, $method);
         
         if ($callback === false) {
             $code = 404;
