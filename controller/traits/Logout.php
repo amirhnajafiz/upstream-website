@@ -2,6 +2,8 @@
 
 namespace mvc\controller\traits;
 
+use mvc\core\auth\Auth;
+
 trait Logout
 {
     /**

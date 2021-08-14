@@ -6,9 +6,8 @@ use mvc\controller\traits\Login;
 use mvc\controller\traits\Logout;
 use mvc\controller\traits\Register;
 use mvc\controller\BaseController;
-use mvc\controller\AuthController;
 use mvc\core\auth\Auth;
-use mvc\core\Error;
+use mvc\core\Message;
 
 /**
  * UserController manages the endpoints and actions
@@ -30,7 +29,7 @@ class UserController extends BaseController
         if (Auth::checkUser())
             return $this->render("dashboard", ['name' => Auth::getUserName()]);
         else {
-            Error::setError("You must be logged in first");
+            Message::addMessage("You must be logged in first.", Message::WARN);
             header("Location: /login"); 
         }
     }

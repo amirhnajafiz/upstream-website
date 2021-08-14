@@ -2,6 +2,10 @@
 
 namespace mvc\controller\traits;
 
+use mvc\middleware\Validator;
+use mvc\core\auth\Auth;
+use mvc\core\Message;
+
 trait Login
 {
     /**
@@ -12,14 +16,15 @@ trait Login
     public function login($request) {
         $data = $request->getBody();
 
-        $valid_result = AuthController::dataValidation($data['username']);
-        foreach($valid_result['violations'] as $message)
-        {
-            Error::setError($message);
-        }
+        $valid = Validator::validate($data);
 
-        Auth::checkIn($valid_result['data']);
-        header("Location: /dashboard");
+        if ($valid) {
+            Auth::checkIn($data['username']);
+            Message::addMessage("Logged in.", Message::OK);
+            header("Location: /dashboard");
+        } else {
+            header("Location: /login");
+        }
     }
 }
 
