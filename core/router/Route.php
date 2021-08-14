@@ -22,7 +22,8 @@ class Route
 
     public function check($path)
     {
-        $pattern = "@^" . preg_replace('/\\\:[a-zA-Z0-9\_\-]+/', '([a-zA-Z0-9\-\_]+)', preg_quote($this->getPath())) . "$@D";
+        $pattern = preg_replace('/{\w+}/', '(\\w+)', $this->getPath());
+        $pattern = '/^' . preg_replace("/\//", '\\/', $pattern) . '$/';
         return preg_match($pattern, $path);
     }
 
