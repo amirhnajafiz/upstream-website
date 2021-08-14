@@ -11,17 +11,11 @@ abstract class Model
 {
     // Private fields
     protected PDO $connector;
-    protected string $table_name;
 
-    public abstract function Do();
+    public function __construct() {
 
-    public abstract function insert();
-
-    public abstract function update();
-
-    public abstract function delete();
-
-    public abstract function select();
+    }
+    
 }
 
 ?>
