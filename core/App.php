@@ -6,6 +6,7 @@ use mvc\core\Request;
 use mvc\core\router\Router;
 use mvc\core\Response;
 use mvc\core\router\Routes;
+use mvc\core\Error;
 
 /**
  * App class is the main class of our website, where
@@ -62,7 +63,15 @@ class App
      */
     public function run()
     {
-        echo $this->router->resolve();
+        $result = $this->router->resolve();
+
+        if (is_array($result)) {
+            $this->response->setContentType('application/json');
+            echo json_encode($result, JSON_PRETTY_PRINT);
+            return;
+        }
+
+        echo $result;
     }
 }
 

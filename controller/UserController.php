@@ -2,8 +2,12 @@
 
 namespace mvc\controller;
 
+use mvc\controller\traits\Login;
+use mvc\controller\traits\Logout;
+use mvc\controller\traits\Register;
 use mvc\controller\BaseController;
 use mvc\core\auth\Auth;
+use mvc\core\Message;
 
 /**
  * UserController manages the endpoints and actions
@@ -12,6 +16,11 @@ use mvc\core\auth\Auth;
  */
 class UserController extends BaseController
 {
+    // Traits
+    use Login;
+    use Logout;
+    use Register;
+
     /**
      * This method returns the dashboard if user is authenticated.
      * 
@@ -19,8 +28,10 @@ class UserController extends BaseController
     public function index() {
         if (Auth::checkUser())
             return $this->render("dashboard", ['name' => Auth::getUserName()]);
-        else 
-            header("Location: /login"); 
+        else {
+            Message::addMessage("You must be logged in first.", Message::WARN);
+            return $this->redirect("login", 307);
+        }
     }
 
     /**

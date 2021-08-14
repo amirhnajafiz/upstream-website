@@ -9,11 +9,19 @@
     <title>Website</title>
   </head>
   <body class="d-flex flex-column min-vh-100">
-      {{navbar}}
+      <?php include_once "header.php"; ?>
+
+      <?php if(isset($message)) { ?>
+        <div class="alert alert-<?php echo $type; ?>" role="alert">
+          <?php echo $message; ?>
+        </div>
+      <?php } ?>
+
       <div class="container">
         {{content}}
       </div>
-      {{footer}}
+
+      <?php include_once "footer.php"; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   </body>
 </html>

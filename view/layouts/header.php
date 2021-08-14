@@ -1,6 +1,7 @@
 <?php
 
   use mvc\core\auth\Auth;
+  use mvc\php\URL;
 
   $URI = $_SERVER['REQUEST_URI'];
   $pos = strpos("?", $URI);
@@ -8,7 +9,7 @@
   $current_span = 'bg-dark text-light rounded';
 ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light px-3">
-  <a class="navbar-brand nav-link <?php if ($URI == "/") echo $current_span; ?>" href="/">Home</a>
+  <a class="navbar-brand nav-link <?php if ($URI == URL::getURL()) echo $current_span; ?>" href="<?php echo URL::getURL(); ?>">Home</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -16,22 +17,22 @@
     <ul class="navbar-nav">
       <?php if(!Auth::checkUser()) { ?>
         <li class="nav-item">
-          <a class="nav-link <?php if ($URI == "/login") echo $current_span; ?>" href="/login">Login</a>
+          <a class="nav-link <?php if ($URI == URL::getURL("login")) echo $current_span; ?>" href="<?php echo URL::getURL("login"); ?>">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link <?php if ($URI == "/sign_up") echo $current_span; ?>" href="/sign_up">Register</a>
+          <a class="nav-link <?php if ($URI == URL::getURL("register")) echo $current_span; ?>" href="<?php echo URL::getURL("register"); ?>">Register</a>
         </li>
       <?php } else { ?>
         <li class="nav-item">
-          <a class="nav-link <?php if ($URI == "/dashboard") echo $current_span; ?>" href="/dashboard">Dashboard</a>
+          <a class="nav-link <?php if ($URI == URL::getURL("dashboard")) echo $current_span; ?>" href="<?php echo URL::getURL("dashboard"); ?>">Dashboard</a>
         </li>
       <?php } ?>
       <li class="nav-item">
-        <a class="nav-link <?php if ($URI == "/upload") echo $current_span; ?>" href="/upload">Upload</a>
+        <a class="nav-link <?php if ($URI == URL::getURL("upload")) echo $current_span; ?>" href="<?php echo URL::getURL("upload"); ?>">Upload</a>
       </li>
       <?php if(Auth::checkUser()) { ?>
         <li class="nav-item">
-          <a class="nav-link bg-danger text-light rounded mx-3" href="/logout">Logout</a>
+          <a class="nav-link bg-danger text-light rounded mx-3" href="<?php echo URL::getURL("logout"); ?>">Logout</a>
         </li>
       <?php } ?>
     </ul>
