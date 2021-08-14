@@ -2,6 +2,9 @@
 
 namespace mvc\controller;
 
+use mvc\controller\traits\Login;
+use mvc\controller\traits\Logout;
+use mvc\controller\traits\Register;
 use mvc\controller\BaseController;
 use mvc\controller\AuthController;
 use mvc\core\auth\Auth;
@@ -14,6 +17,11 @@ use mvc\core\Error;
  */
 class UserController extends BaseController
 {
+    // Traits
+    use Login;
+    use Logout;
+    use Register;
+
     /**
      * This method returns the dashboard if user is authenticated.
      * 
@@ -33,37 +41,6 @@ class UserController extends BaseController
      */
     public function upload() {
         return $this->render("userFileUpload", ['name' => Auth::getUserName()]);
-    }
-
-    /**
-     * This method manages the user login feature.
-     * 
-     * @param request user data
-     */
-    public function login($request) {
-        $data = $request->getBody();
-
-        $valid_result = AuthController::dataValidation($data['username']);
-        foreach($valid_result['violations'] as $message)
-        {
-            Error::setError($message);
-        }
-
-        Auth::checkIn($valid_result['data']);
-        header("Location: /dashboard");
-    }
-
-    /**
-     * This method logs the user out of our website.
-     * 
-     */
-    public function logout() {
-        Auth::checkOut();
-        header("Location: /");
-    }
-
-    public function sign_up() {
-        # Do sign up
     }
 }
 

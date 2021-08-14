@@ -2,13 +2,16 @@
 
 namespace mvc\core\auth;
 
+use mvc\utils\CookieHandler;
+
 /**
  * Auth class manages the user authentications.
  * 
  */
 class Auth 
 {
-    private static string $COOCKIE_NAME = "username";
+    const TERMINATOR = -3601;
+    private static string $COOKIE_NAME = "username";
 
     /**
      * This method logs the user in our website.
@@ -17,13 +20,7 @@ class Auth
      */
     public static function checkIn($username)
     {
-        $coockie_value = $username;
-        $time = time() + (86400 * 30);
-        $dir = "/";
-        if (!self::checkUser())
-        {
-            setcookie(self::$COOCKIE_NAME, $coockie_value, $time, $dir);
-        }
+        CookieHandler::set($COOKIE_NAME, $username);
     }
 
     /**
@@ -33,7 +30,7 @@ class Auth
      */
     public static function checkUser()
     {
-        return isset($_COOKIE[self::$COOCKIE_NAME]);
+        return (bool)CookieHandler::get($COOKIE_NAME);
     }
 
     /**
@@ -42,12 +39,7 @@ class Auth
      */
     public static function checkOut()
     {
-        $time = time() - 3600;
-        $dir = "/";
-        if (self::checkUser())
-        {
-            setcookie(self::$COOCKIE_NAME, "", $time, $dir);
-        }
+        CookieHandler::set($COOKIE_NAME, "", self::TERMINATOR);
     }
 
     /**
@@ -57,7 +49,7 @@ class Auth
      */
     public static function getUserName()
     {
-        return self::checkUser() ? $_COOKIE[self::$COOCKIE_NAME] : "";
+        return checkUser() ? CookieHandler::get($COOKIE_NAME) : "Guest";
     }
 }
 
