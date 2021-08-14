@@ -16,7 +16,7 @@ class Validator
     public static function isCleanData($data)
     {
         $temp = $data;
-        return preg_replace("/[^a-zA-Z0-9]+/", " ", $data) == $temp;
+        return preg_replace("/[^a-zA-Z0-9]+/", " ", $data) != $temp;
     }
 
     public static function validate($data)

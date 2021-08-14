@@ -20,7 +20,7 @@ class Auth
      */
     public static function checkIn($username)
     {
-        CookieHandler::set($COOKIE_NAME, $username);
+        CookieHandler::set(self::$COOKIE_NAME, $username);
     }
 
     /**
@@ -30,7 +30,7 @@ class Auth
      */
     public static function checkUser()
     {
-        return (bool)CookieHandler::get($COOKIE_NAME);
+        return (bool)CookieHandler::get(self::$COOKIE_NAME);
     }
 
     /**
@@ -39,7 +39,7 @@ class Auth
      */
     public static function checkOut()
     {
-        CookieHandler::set($COOKIE_NAME, "", self::TERMINATOR);
+        CookieHandler::set(self::$COOKIE_NAME, "", self::TERMINATOR);
     }
 
     /**
@@ -49,7 +49,7 @@ class Auth
      */
     public static function getUserName()
     {
-        return checkUser() ? CookieHandler::get($COOKIE_NAME) : "Guest";
+        return self::checkUser() ? CookieHandler::get(self::$COOKIE_NAME) : "Guest";
     }
 }
 

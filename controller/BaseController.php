@@ -3,6 +3,7 @@
 namespace mvc\controller;
 
 use mvc\core\view\RenderEngine;
+use mvc\core\App;
 
 /**
  * Base controller is the basic controller design
@@ -24,7 +25,7 @@ class BaseController
 
     public function redirect(string $path, int $code = 301) 
     {
-        return Application::$app->response->redirect($path, $code);
+        return App::$app->response->redirect($path, $code);
     }
 }
 

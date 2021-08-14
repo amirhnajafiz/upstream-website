@@ -4,9 +4,12 @@ namespace mvc\php;
 
 use mvc\core\App;
 
-function getURL($name = "home") 
+class URL 
 {
-    return App::getInstance()->router->getURL($name);
+    public static function getURL($name = "home") 
+    {
+        return App::get_instance()->router->getURL($name);
+    }
 }
 
 ?>

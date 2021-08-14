@@ -27,7 +27,7 @@ class Response
 
     public function redirect(string $name = "home", int $code = 301) 
     {
-        $path = getURL($name);
+        $path = URL::getURL($name);
         header("Location: $path", TRUE, $code);
     }
 }

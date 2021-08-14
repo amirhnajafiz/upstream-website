@@ -63,7 +63,15 @@ class App
      */
     public function run()
     {
-        echo $this->router->resolve();
+        $result = $this->router->resolve();
+
+        if (is_array($result)) {
+            $this->response->setContentType('application/json');
+            echo json_encode($result, JSON_PRETTY_PRINT);
+            return;
+        }
+
+        echo $result;
     }
 }
 
