@@ -49,7 +49,7 @@ CREATE TABLE `file` (
 
 CREATE TABLE `guest` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
+  `joinDate` date DEFAULT NULL,
   `currentUse` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

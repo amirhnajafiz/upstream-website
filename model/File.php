@@ -10,43 +10,19 @@ use mvc\model\Model;
  */
 class File extends Model 
 {
-    // Singleton instance
-    private static File $file;
+    public int $id;
+    public string $name;
+    public string $link;
+    public string $uploader;
+    public int $isPrivate;
+    public date $uploadDate;
+    public int $download;
+    public string $type;
+    public int $size;
+    public date $expireDate;
+    public int $valid;
 
-    private function __construct(PDO $pdo, string $table_name)
-    {
-        $this->connector = $pdo;
-        $this->table_name = $table_name;
-    }
-
-    /**
-     * This method initialize the File model.
-     * 
-     * @param pdo is the database connector
-     * @param table_name is the name of this model table in our database
-     */
-    public function Do(PDO $pdo, string $table_name) {
-        if (!isset(self::$file)) {
-            self::$file = new File($pdo, $table_name);
-        }
-        return self::$file;
-    }
-
-    public function insert() {
-        // Insert query
-    }
-
-    public function update() {
-        // Update query
-    }
-
-    public function delete() {
-        // Delete query
-    }
-
-    public function select() {
-        // Select query
-    }
+    protected $table_name = "file";
 }
 
 ?>
