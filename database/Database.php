@@ -2,6 +2,9 @@
 
 namespace mvc\database;
 
+use mvc\core\Message;
+use mvc\controller\BaseController;
+
 /**
  * Database class is a cofigure for out database connection.
  * 
@@ -11,7 +14,7 @@ class Database
     // Constant fields
     const DB_HOST = "127.0.0.1";
     const DB_PORT = "3440";
-    const DB_NAME = "MVC";
+    const DB_NAME = "homework6";
     const DB_USERNAME = "root";
     const DB_PASSWORD = "";
 
@@ -28,7 +31,8 @@ class Database
             $this->pdo = new \PDO($dsn, self::DB_USERNAME, self::DB_PASSWORD);
             $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         } catch(\PDOException $e) {
-            echo $e->getMessage();
+            Message::addMessage($e->getMessage(), Message::ERROR);
+            (new BaseController())->redirect("login");
             exit();
         }
     }

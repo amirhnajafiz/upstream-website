@@ -12,7 +12,7 @@ use mvc\database\Database;
 abstract class Model 
 {
     // Private fields
-    protected PDO $connector;
+    protected $pdo;
 
     /**
      * The constructor gets a new connection from database.
@@ -20,7 +20,7 @@ abstract class Model
      */
     public function __construct() 
     {
-        $this->connector = Database::getInstance()->getPDO();
+        $this->pdo = Database::getInstance()->getPDO();
     }
 
     /**

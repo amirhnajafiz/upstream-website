@@ -12,7 +12,7 @@ trait Logout
      */
     public function logout() {
         Auth::checkOut();
-        return $this->redirect("home");
+        return $this->redirect("login");
     }
 }
 
