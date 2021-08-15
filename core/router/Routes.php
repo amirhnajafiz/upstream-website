@@ -42,6 +42,7 @@ class Routes
         $app->router->get('/requests', [AdminController::class, 'requests'])->name("requests");
         $app->router->get('/users', [AdminController::class, 'users'])->name("users");
         $app->router->post('/accept', [AdminController::class, 'doAccept']);
+        $app->router->post('/delete', [AdminController::class, 'doDelete']);
     }
 }
 

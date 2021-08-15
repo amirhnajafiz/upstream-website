@@ -3,7 +3,7 @@
         echo "This is dashboard of " . $name;
     ?>
 </h2>
-<?php if (isset($files)) { ?>
+<?php if (isset($files) && isset(json_decode($files)[0])) { ?>
     <table class="table">
         <tr>
         <?php foreach(json_decode($files)[0] as $single_key => $single_value) { ?>
@@ -11,6 +11,7 @@
                 <th> <?php echo $single_key; ?> </th>
             <?php } ?>
         <?php } ?>
+        <th>Delete</th>
         </tr>
         <?php foreach(json_decode($files) as $file) { ?>
             <tr>
@@ -23,6 +24,12 @@
                         <?php } ?>
                     <?php } ?>
                 <?php } ?>
+                <td>
+                    <form action="/delete" method="POST">
+                        <input type="hidden" value="<?php echo $file->id; ?>" name="id" />
+                        <input type="submit" value="Remove" class="btn btn-warning" />
+                    </form>
+                </td>  
             </tr>
         <?php } ?>
     </table>

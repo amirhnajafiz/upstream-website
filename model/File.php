@@ -32,12 +32,17 @@ class File extends Model
 
     public function getUserFiles($username)
     {
-        $sth = $this->pdo->prepare("SELECT F.name, link, uploaddate, isprivate, size, type, download , expiredate
+        $sth = $this->pdo->prepare("SELECT F.name, link, uploaddate, isprivate, size, type, download , expiredate, F.id
                                     FROM $this->table_name as F JOIN user as U ON F.uploader = U.name
                                     WHERE U.name = '$username'");
         $sth->execute();
 
         return $sth->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function selectFileById($id)
+    {
+        return $this->select($this->table_name, ['id' => $id]);
     }
 
     public function removeFile($id)

@@ -7,6 +7,7 @@ use mvc\core\Message;
 use mvc\model\User;
 use mvc\model\Request;
 use mvc\controller\traits\Accept;
+use mvc\controller\traits\Delete;
 
 /**
  * Admin controller manages the admin abilities.
@@ -16,6 +17,7 @@ class AdminController extends BaseController
 {
     // traits
     use Accept;
+    use Delete;
     
     /**
      * This method sends the user to requests page, is it was authenticate.

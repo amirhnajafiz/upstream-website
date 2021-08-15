@@ -1,7 +1,7 @@
 <h2 class="my-3">
     <?php echo "Users page" ?>
 </h2>
-<?php if (isset($users)) { ?>
+<?php if (isset($users) && isset(json_decode($users)[0])) { ?>
     <table class="table">
         <tr>
         <?php foreach(json_decode($users)[0] as $single_key => $single_value) { ?>
