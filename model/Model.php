@@ -57,6 +57,8 @@ abstract class Model
      */
     public function insert($table_name, array $data = [])
     {
+        $keys = "(" . implode(",", array_keys($data)) . ")";
+
         $format_data = [];
 
         foreach($data as $single) {
@@ -65,7 +67,7 @@ abstract class Model
 
         $format_data = "(" . implode(",", $format_data) . ")";
 
-        $sth = $this->pdo->prepare("INSERT INTO $table_name VALUES $format_data");
+        $sth = $this->pdo->prepare("INSERT INTO $table_name $keys VALUES $format_data");
         
         try {
             $sth->execute();

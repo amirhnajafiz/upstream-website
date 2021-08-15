@@ -29,6 +29,7 @@ class Routes
 
         // User routes
         $app->router->post('/login', [UserController::class, 'login']);
+        $app->router->post('/sign_up', [UserController::class, 'sign_up']);
         $app->router->post('/', [UserController::class, 'logout']);
         $app->router->get('/dashboard', [UserController::class, 'index'])->name("dashboard");
         $app->router->get('/upload', [UserController::class, 'upload'])->name("upload");
