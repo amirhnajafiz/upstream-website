@@ -5,6 +5,7 @@ namespace mvc\model;
 use mvc\model\Model;
 use mvc\model\traits\Login;
 use mvc\model\traits\Register;
+use mvc\model\traits\Total;
 
 /**
  * User model is the user schema in our database.
@@ -14,6 +15,7 @@ class User extends Model
 {
     use Login;
     use Register;
+    use Total;
 
     public string $name;
     public string $password;

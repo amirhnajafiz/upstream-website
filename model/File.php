@@ -3,6 +3,7 @@
 namespace mvc\model;
 
 use mvc\model\Model;
+use mvc\model\traits\Total;
 
 /**
  * File model is the file schema in our database.
@@ -10,6 +11,9 @@ use mvc\model\Model;
  */
 class File extends Model 
 {
+    // traits
+    use Total;
+
     public int $id;
     public string $name;
     public string $link;

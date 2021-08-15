@@ -141,6 +141,23 @@ abstract class Model
             return -1;
         }
     }
+
+    /**
+     * This method counts all of the items of specific table.
+     * 
+     * @param table_name the name of table we want
+     * @return int the total number of items
+     */
+    public function count_all($table_name) 
+    {
+        $sth = $this->pdo->prepare("SELECT COUNT(*) FROM $table_name");
+        try {
+            $sth->execute();
+            return $sth->fetch();
+        } catch (\PDOExecption $e) {
+            return 0;
+        }
+    }
 }
 
 ?>
