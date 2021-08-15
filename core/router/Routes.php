@@ -6,6 +6,7 @@ use mvc\core\App;
 use mvc\controller\UserController;
 use mvc\controller\LoginController;
 use mvc\controller\AdminController;
+use mvc\controller\HomeController;
 
 /**
  * Routes class is the class for managing the routes of our
@@ -23,7 +24,7 @@ class Routes
         $app = App::get_instance();
 
         // Write your routes here
-        $app->router->get('/', 'home')->name("home");
+        $app->router->get('/', [HomeController::class, 'index'])->name("home");
         $app->router->get('/sign_up', 'sign_up')->name("register");
         $app->router->get('/login', 'login')->name("login");
 

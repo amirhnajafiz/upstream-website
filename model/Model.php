@@ -31,7 +31,7 @@ abstract class Model
      * @param where our conditions for select query
      * @return Object the model of the select result
      */
-    public function select($table_name, array $where = [], bool $getAll = false)
+    public function select($table_name, array $where = [])
     {
         $condition = [];
 
@@ -44,7 +44,15 @@ abstract class Model
         $sth = $this->pdo->prepare("SELECT * FROM $table_name WHERE $condition");
         $sth->execute();
 
-        return $getAll ? $sth->fetchAll(PDO::FETCH_OBJ, get_called_class()) : $sth->fetchObject(get_called_class());
+        return $sth->fetchObject(get_called_class());
+    }
+
+    public function selectAll($table_name)
+    {
+        $sth = $this->pdo->prepare("SELECT * FROM $table_name");
+        $sth->execute();
+
+        return $sth->fetchAll(\PDO::FETCH_OBJ);
     }
 
     /**
