@@ -29,6 +29,11 @@ class User extends Model
     {
         return $this->update($this->table_name, ['status' => $status], ['name' => $name]);
     }
+
+    public function changeConfirm($name, $status = 0)
+    {
+        return $this->update($this->table_name, ['canconfirm' => $status], ['name' => $name]);
+    }
 }
 
 ?>

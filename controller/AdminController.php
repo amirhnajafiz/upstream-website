@@ -9,6 +9,7 @@ use mvc\model\Request;
 use mvc\controller\traits\Accept;
 use mvc\controller\traits\Delete;
 use mvc\controller\traits\Lock;
+use mvc\controller\traits\Confirm;
 
 /**
  * Admin controller manages the admin abilities.
@@ -20,6 +21,7 @@ class AdminController extends BaseController
     use Accept;
     use Delete;
     use Lock;
+    use Confirm;
     
     /**
      * This method sends the user to requests page, is it was authenticate.

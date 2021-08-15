@@ -45,6 +45,8 @@ class Routes
         $app->router->post('/delete', [AdminController::class, 'doDelete']);
         $app->router->post('/lock', [AdminController::class, 'lock']);
         $app->router->post('/unlock', [AdminController::class, 'unlock']);
+        $app->router->post('/upgrade', [AdminController::class, 'upgrade']);
+        $app->router->post('/downgrade', [AdminController::class, 'downgrade']);
     }
 }
 
