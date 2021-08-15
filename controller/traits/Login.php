@@ -20,10 +20,16 @@ trait Login
         $valid = Validator::validate($data);
 
         if ($valid) {
-            if ( (new User())->login($data['username'], $data['password']) ) {
-                Auth::checkIn($data['username']);
-                Message::addMessage("Logged in.", Message::OK);
-                return $this->redirect("dashboard");
+            $user = (new User())->login($data['username'], $data['password']);
+            if ($user) {
+                if ($user->status === 1) {
+                    Auth::checkIn($data['username'], $user->isadmin, $user->canconfirm);
+                    Message::addMessage("Logged in.", Message::OK);
+                    return $this->redirect("dashboard");
+                } else {
+                    Message::addMessage("Your account is been locked.", Message::ERROR);
+                    return $this->redirect("home");
+                }
             } else {
                 Message::addMessage("Username or password is incorrect.", Message::ERROR);
                 return $this->redirect("login");

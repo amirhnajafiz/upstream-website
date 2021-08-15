@@ -16,8 +16,8 @@ class User extends Model
     public string $name;
     public string $password;
     public int $status;
-    public int $isAdmin;
-    public int $canConfirm;
+    public int $isadmin;
+    public int $canconfirm;
 
     protected $table_name = "user";
 }

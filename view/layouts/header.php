@@ -30,10 +30,22 @@
       <li class="nav-item">
         <a class="nav-link <?php if ($URI == URL::getURL("upload")) echo $current_span; ?>" href="<?php echo URL::getURL("upload"); ?>">Upload</a>
       </li>
-      <?php if(Auth::checkUser()) { ?>
+      <?php if(Auth::canUserConfirm()) { ?>
         <li class="nav-item">
-          <a class="nav-link bg-danger text-light rounded mx-3" href="<?php echo URL::getURL("logout"); ?>">Logout</a>
+          <a class="nav-link <?php if ($URI == URL::getURL("requests")) echo $current_span; ?>" href="<?php echo URL::getURL("requests"); ?>">Requests</a>
         </li>
+      <?php } ?>
+      <?php if(Auth::isUserAdmin()) { ?>
+        <li class="nav-item">
+          <a class="nav-link <?php if ($URI == URL::getURL("users")) echo $current_span; ?>" href="<?php echo URL::getURL("users"); ?>">Users</a>
+        </li>
+      <?php } ?>
+      <?php if(Auth::checkUser()) { ?>
+        <form action="<?php echo URL::getURL(); ?>" method="POST">
+          <li class="nav-item">
+            <input type="submit" class="nav-link bg-danger text-light rounded mx-3" value="Logout" />
+          </li>
+        </form>
       <?php } ?>
     </ul>
   </div>

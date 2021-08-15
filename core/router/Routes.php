@@ -5,6 +5,7 @@ namespace mvc\core\router;
 use mvc\core\App;
 use mvc\controller\UserController;
 use mvc\controller\LoginController;
+use mvc\controller\AdminController;
 
 /**
  * Routes class is the class for managing the routes of our
@@ -28,9 +29,13 @@ class Routes
 
         // User routes
         $app->router->post('/login', [UserController::class, 'login']);
-        $app->router->get('/logout', [UserController::class, 'logout'])->name("logout");
+        $app->router->post('/', [UserController::class, 'logout']);
         $app->router->get('/dashboard', [UserController::class, 'index'])->name("dashboard");
         $app->router->get('/upload', [UserController::class, 'upload'])->name("upload");
+
+        // Admin routes 
+        $app->router->get('/requests', [AdminController::class, 'requests'])->name("requests");
+        $app->router->get('/users', [AdminController::class, 'users'])->name("users");
     }
 }
 
