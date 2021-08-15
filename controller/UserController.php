@@ -8,6 +8,7 @@ use mvc\controller\traits\Register;
 use mvc\controller\BaseController;
 use mvc\core\auth\Auth;
 use mvc\core\Message;
+use mvc\model\File;
 
 /**
  * UserController manages the endpoints and actions
@@ -26,9 +27,11 @@ class UserController extends BaseController
      * 
      */
     public function index() {
-        if (Auth::checkUser())
-            return $this->render("dashboard", ['name' => Auth::getUserName()]);
-        else {
+        if (Auth::checkUser()) {
+            $files = (new File())->getUserFiles(Auth::getUserName());
+            $files = json_encode($files);
+            return $this->render("dashboard", ['name' => Auth::getUserName(), 'files' => $files]);
+        } else {
             Message::addMessage("You must be logged in first.", Message::WARN);
             return $this->redirect("login", 307);
         }
