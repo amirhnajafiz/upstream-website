@@ -24,11 +24,11 @@
                             <td>
                                 <form action="/download" method="POST">
                                     <input value="<?php echo $file->id; ?>" type="hidden" name="id" /> 
-                                    <input type="submit" value="Download" class="btn btn-primary" />
+                                    <input type="submit" value="Download" class="btn btn-primary" <?php if ($file->isprivate) echo "disabled"; ?> />
                                 </form>
                             </td>
                         <?php } else { ?>
-                            <td> <?php echo $value; if ($key == 'size') echo " Mb"; ?> </td>
+                            <td> <?php if ($key == 'size') echo round($value / 1048576, 1) . " Mb"; else echo $value; ?> </td>
                         <?php } ?>
                     <?php } ?>
                 <?php } ?>
@@ -44,7 +44,7 @@
         <?php } ?>
     </table>
 <?php } else { ?>
-    <h2 class="mt-5">
+    <h3 class="mt-5">
         No movies yet.
-    </h2>
+    </h3>
 <?php } ?>

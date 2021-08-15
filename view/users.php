@@ -44,7 +44,7 @@
         <?php } ?>
     </table>
 <?php } else { ?>
-    <h2 class="mt-5">
+    <h3 class="mt-5">
         No users yet.
-    </h2>
+    </h3>
 <?php } ?>

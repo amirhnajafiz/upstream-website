@@ -32,9 +32,12 @@ trait Upload
 
         $target_dir = App::$ROOT . "/uploads/";
 
-        $imageFileType = $_FILES["file"]["type"];
-        $imageFileType = explode('/', $imageFileType);
-        $imageFileType = $imageFileType[1];
+        if (!file_exists($target_dir)) {
+            mkdir($target_dir, 0777, true);
+        }
+
+        $path = $_FILES['file']['name'];
+        $imageFileType = pathinfo($path, PATHINFO_EXTENSION);
 
         $target_name = "file" . time() . "." . $imageFileType;
         $target_file = $target_dir . $target_name;
@@ -57,7 +60,7 @@ trait Upload
         if ($file != -1) {
             if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
                 (new Request())->insertRequest($file);
-                Message::addMessage("Your file uploaded sucessfully. Wait for admin accept to see your file. $target_file", Message::OK);
+                Message::addMessage("Your file uploaded sucessfully. Wait for admin accept to see your file.", Message::OK);
                 return $this->redirect("home");
             } else {
                 (new File())->removeFile($file);

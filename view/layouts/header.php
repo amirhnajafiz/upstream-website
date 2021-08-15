@@ -9,7 +9,9 @@
   $current_span = 'bg-dark text-light rounded';
 ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light px-3">
-  <a class="navbar-brand nav-link <?php if ($URI == URL::getURL()) echo $current_span; ?>" href="<?php echo URL::getURL(); ?>">Home</a>
+  <a class="navbar-brand nav-link" href="<?php echo URL::getURL(); ?>">
+    <img src="https://ui-avatars.com/api/?name=Up-Steam&background=000000&color=fffff" class="rounded-circle" width="35"/>
+  </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>

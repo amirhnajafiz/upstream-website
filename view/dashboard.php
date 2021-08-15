@@ -1,6 +1,6 @@
 <h2 class="my-3">
     <?php
-        echo "This is dashboard of " . $name;
+        echo "Hello " . $name . " welcome to Up-Stream.";
     ?>
 </h2>
 <?php if (isset($files) && isset(json_decode($files)[0])) { ?>
@@ -25,7 +25,7 @@
                                 </form>
                             </td>
                         <?php } else { ?>
-                            <td> <?php echo $value; if ($key == 'size') echo " Mb"; ?> </td>
+                            <td> <?php if ($key == 'size') echo round($value / 1048576, 1) . " Mb"; else echo $value; ?> </td>
                         <?php } ?>
                     <?php } ?>
                 <?php } ?>
@@ -39,7 +39,7 @@
         <?php } ?>
     </table>
 <?php } else { ?>
-    <h2 class="mt-5">
+    <h3 class="mt-5">
         No movies yet.
-    </h2>
+    </h3>
 <?php } ?>

@@ -43,7 +43,7 @@ class FileControl
             return false;
         }
         if (!self::typeCheck($type)) {
-            Message::addMessage("File should be " . implode(", ", self::DATA_TYPES) . " .", Message::ERROR);
+            Message::addMessage("File should be " . implode(", ", self::DATA_TYPES) . " . $type", Message::ERROR);
             return false;
         }
         return true;
