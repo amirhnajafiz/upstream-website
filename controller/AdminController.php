@@ -4,6 +4,8 @@ namespace mvc\controller;
 
 use mvc\core\auth\Auth;
 use mvc\core\Message;
+use mvc\model\User;
+use mvc\model\Request;
 
 /**
  * Admin controller manages the admin abilities.
@@ -16,9 +18,11 @@ class AdminController extends BaseController
      * 
      */
     public function requests() {
-        if (Auth::canUserConfirm())
-            return $this->render("requests");
-        else {
+        if (Auth::canUserConfirm()) {
+            $requests = (new Request)->getRequestMovies();
+            $requests = json_encode($requests);
+            return $this->render("requests", ['requests' => $requests]);
+        } else {
             Message::addMessage("Forbidden for you.", Message::WARN);
             return $this->redirect("home", 307);
         }
@@ -29,9 +33,14 @@ class AdminController extends BaseController
      * 
      */
     public function users() {
-        if (Auth::isUserAdmin())
-            return $this->render("users");
-        else {
+        if (Auth::isUserAdmin()) {
+            $users = (new User)->fetchTotal();
+            foreach($users as $user) {
+                unset($user->password);
+            }
+            $users = json_encode($users);
+            return $this->render("users", ['users' => $users]);
+        } else {
             Message::addMessage("Can't access this page.", Message::WARN);
             return $this->redirect("home", 307);
         }
