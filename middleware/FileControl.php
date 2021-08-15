@@ -6,7 +6,7 @@ use mvc\core\Message;
 
 class FileControl
 {
-    const DATA_LIMIT = 100000000;
+    const DATA_LIMIT = 1000000000000;
     const DATA_TYPES = ['MKV', 'MP4', 'MOV', 'GIF', 'JPG', 'PNG'];
 
     public static function sizeCheck($data)
@@ -25,7 +25,7 @@ class FileControl
             Message::addMessage("File is too large. ( Maximum 500 MB file size is allowed )", Message::ERROR);
             return false;
         }
-        if (self::typeCheck($type)) {
+        if (!self::typeCheck($type)) {
             Message::addMessage("File should be " . implode(", ", self::DATA_TYPES) . " .", Message::ERROR);
             return false;
         }

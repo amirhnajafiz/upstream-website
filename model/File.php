@@ -39,6 +39,11 @@ class File extends Model
 
         return $sth->fetchAll(\PDO::FETCH_OBJ);
     }
+
+    public function removeFile($id)
+    {
+        return $this->delete($this->table_name, ['id' => $id]);
+    }
 }
 
 ?>

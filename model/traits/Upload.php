@@ -12,7 +12,6 @@ trait Upload
             "link" => $link,
             "uploader" => $username,
             "isprivate" => 0,
-            "uploaddate" => date(time()),
             "download" => 0,
             "type" => $type,
             "size" => $size,

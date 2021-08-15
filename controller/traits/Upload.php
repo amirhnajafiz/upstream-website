@@ -35,7 +35,7 @@ trait Upload
         }
 
         $user = Auth::getUserName();
-        $expiredate = NULL;
+        $expiredate = "";
 
         if ($user == "Guest") {
             $expiredate = date(time() + 86400);
@@ -49,6 +49,7 @@ trait Upload
                 Message::addMessage("Your file uploaded sucessfully. Wait for admin accept to see your file.", Message::OK);
                 return $this->redirect("home");
             } else {
+                (new File())->removeFile($file);
                 Message::addMessage("File did not upload.", Message::ERROR);
                 return $this->redirect("upload");
             }
