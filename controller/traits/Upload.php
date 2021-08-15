@@ -10,8 +10,17 @@ use mvc\core\Message;
 use mvc\model\File;
 use mvc\model\Request;
 
+/**
+ * This trait manages the uploading part of our website.
+ * 
+ */
 trait Upload 
 {
+    /**
+     * This method implements the functionality of 
+     * uploading a file.
+     * 
+     */
     public function uploadFile($request) {
         $data = $request->getBody();
 

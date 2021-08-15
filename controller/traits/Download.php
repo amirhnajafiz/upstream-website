@@ -7,9 +7,19 @@ use mvc\core\auth\Auth;
 use mvc\core\Message;
 use mvc\model\File;
 
+/**
+ * This trait is for file downloading.
+ * 
+ */
 trait Download
 {
-    public function download($request) {
+    /**
+     * This method downloads a file.
+     * 
+     * @param request user request
+     */
+    public function download($request) 
+    {
         $data = $request->getBody();
 
         $valid = Validator::validate($data);

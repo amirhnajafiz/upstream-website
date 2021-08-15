@@ -7,6 +7,10 @@ use mvc\core\auth\Auth;
 use mvc\core\Message;
 use mvc\model\User;
 
+/**
+ * This method manages the user registration.
+ * 
+ */
 trait Register
 {
     /**

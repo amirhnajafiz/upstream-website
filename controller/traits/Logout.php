@@ -4,6 +4,10 @@ namespace mvc\controller\traits;
 
 use mvc\core\auth\Auth;
 
+/**
+ * This trait manages the user logging out.
+ * 
+ */
 trait Logout
 {
     /**
