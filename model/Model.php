@@ -12,7 +12,7 @@ use mvc\database\Database;
 abstract class Model 
 {
     // Private fields
-    protected PDO $connector;
+    protected $pdo;
 
     /**
      * The constructor gets a new connection from database.
@@ -20,7 +20,7 @@ abstract class Model
      */
     public function __construct() 
     {
-        $this->connector = Database::getInstance()->getPDO();
+        $this->pdo = Database::getInstance()->getPDO();
     }
 
     /**
@@ -31,7 +31,7 @@ abstract class Model
      * @param where our conditions for select query
      * @return Object the model of the select result
      */
-    public function select($table_name, array $where = [], bool $getAll = false)
+    public function select($table_name, array $where = [])
     {
         $condition = [];
 
@@ -44,7 +44,19 @@ abstract class Model
         $sth = $this->pdo->prepare("SELECT * FROM $table_name WHERE $condition");
         $sth->execute();
 
-        return $getAll ? $sth->fetchAll(PDO::FETCH_OBJ, get_called_class()) : $sth->fetchObject(get_called_class());
+        return $sth->fetchObject(get_called_class());
+    }
+
+    /**
+     * This method selects all of the users.
+     * 
+     */
+    public function selectAll($table_name)
+    {
+        $sth = $this->pdo->prepare("SELECT * FROM $table_name");
+        $sth->execute();
+
+        return $sth->fetchAll(\PDO::FETCH_OBJ);
     }
 
     /**
@@ -57,6 +69,8 @@ abstract class Model
      */
     public function insert($table_name, array $data = [])
     {
+        $keys = "(" . implode(",", array_keys($data)) . ")";
+
         $format_data = [];
 
         foreach($data as $single) {
@@ -65,7 +79,7 @@ abstract class Model
 
         $format_data = "(" . implode(",", $format_data) . ")";
 
-        $sth = $this->pdo->prepare("INSERT INTO $table_name VALUES $format_data");
+        $sth = $this->pdo->prepare("INSERT INTO $table_name $keys VALUES $format_data");
         
         try {
             $sth->execute();
@@ -101,7 +115,7 @@ abstract class Model
             $format_data[] = $key . "=" . "'" . $val . "'";
         }
 
-        $format_data = implode(", ", $condition);
+        $format_data = implode(", ", $format_data);
 
         $sth = $this->pdo->prepare("UPDATE $table_name SET $format_data WHERE $condition");
         try {
@@ -137,6 +151,23 @@ abstract class Model
         } catch (\PDOExecption $e) {
             echo $e->getMessage();
             return -1;
+        }
+    }
+
+    /**
+     * This method counts all of the items of specific table.
+     * 
+     * @param table_name the name of table we want
+     * @return int the total number of items
+     */
+    public function count_all($table_name) 
+    {
+        $sth = $this->pdo->prepare("SELECT COUNT(*) FROM $table_name");
+        try {
+            $sth->execute();
+            return $sth->fetch();
+        } catch (\PDOExecption $e) {
+            return 0;
         }
     }
 }

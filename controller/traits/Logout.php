@@ -4,6 +4,10 @@ namespace mvc\controller\traits;
 
 use mvc\core\auth\Auth;
 
+/**
+ * This trait manages the user logging out.
+ * 
+ */
 trait Logout
 {
     /**
@@ -12,7 +16,7 @@ trait Logout
      */
     public function logout() {
         Auth::checkOut();
-        return $this->redirect("home");
+        return $this->redirect("login");
     }
 }
 
