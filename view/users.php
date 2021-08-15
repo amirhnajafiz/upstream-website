@@ -12,6 +12,9 @@
         <th></th>
         </tr>
         <?php foreach(json_decode($users) as $user) { ?>
+            <?php if ($user->name == $current_admin) { 
+                continue;
+            } ?>
             <tr>
                 <?php foreach($user as $key => $value) { ?>
                     <?php if ($key != "status") { ?>
@@ -19,7 +22,8 @@
                     <?php } ?>
                 <?php } ?>
                 <td>
-                    <form action="" method="POST">
+                    <form action="<?php if ($user->status) echo "/lock"; else echo "/unlock"; ?>" method="POST">
+                        <input type="hidden" value="<?php echo $user->name ?>" name="name" />
                         <?php if ($user->status) { ?>
                             <input type="submit" class="btn btn-danger" value="Lock" />
                         <?php } else { ?>

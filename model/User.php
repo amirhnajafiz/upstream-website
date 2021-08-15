@@ -24,6 +24,11 @@ class User extends Model
     public int $canconfirm;
 
     protected $table_name = "user";
+
+    public function lockByName($name, $status = 0)
+    {
+        return $this->update($this->table_name, ['status' => $status], ['name' => $name]);
+    }
 }
 
 ?>

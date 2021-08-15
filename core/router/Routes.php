@@ -43,6 +43,8 @@ class Routes
         $app->router->get('/users', [AdminController::class, 'users'])->name("users");
         $app->router->post('/accept', [AdminController::class, 'doAccept']);
         $app->router->post('/delete', [AdminController::class, 'doDelete']);
+        $app->router->post('/lock', [AdminController::class, 'lock']);
+        $app->router->post('/unlock', [AdminController::class, 'unlock']);
     }
 }
 
