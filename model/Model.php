@@ -47,6 +47,10 @@ abstract class Model
         return $sth->fetchObject(get_called_class());
     }
 
+    /**
+     * This method selects all of the users.
+     * 
+     */
     public function selectAll($table_name)
     {
         $sth = $this->pdo->prepare("SELECT * FROM $table_name");
