@@ -54,6 +54,11 @@ class File extends Model
     {
         return $this->update($this->table_name, ['valid' => 1], ['id' => $id]);
     }
+
+    public function downloadFile($id, $download)
+    {
+        return $this->update($this->table_name, ['download' => $download], ['id' => $id]);
+    }
 }
 
 ?>

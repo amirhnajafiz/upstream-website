@@ -18,7 +18,12 @@
                 <?php foreach($file as $key => $value) { ?>
                     <?php if ($key != "id") { ?>
                         <?php if ($key == 'link') { ?>
-                            <td> <a href="<?php echo $value; ?>" target="_blank">Download</a> </td>
+                            <td>
+                                <form action="/download" method="POST">
+                                    <input value="<?php echo $file->id; ?>" type="hidden" name="id" /> 
+                                    <input type="submit" value="Download" class="btn btn-primary" />
+                                </form>
+                            </td>
                         <?php } else { ?>
                             <td> <?php echo $value; if ($key == 'size') echo " Mb"; ?> </td>
                         <?php } ?>

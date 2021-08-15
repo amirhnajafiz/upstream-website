@@ -37,6 +37,7 @@ class Routes
 
         // Web routes
         $app->router->post('/upload', [UserController::class, 'uploadFile']);
+        $app->router->post('/download', [UserController::class, 'download']);
 
         // Admin routes 
         $app->router->get('/requests', [AdminController::class, 'requests'])->name("requests");
