@@ -111,7 +111,7 @@ abstract class Model
             $format_data[] = $key . "=" . "'" . $val . "'";
         }
 
-        $format_data = implode(", ", $condition);
+        $format_data = implode(", ", $format_data);
 
         $sth = $this->pdo->prepare("UPDATE $table_name SET $format_data WHERE $condition");
         try {

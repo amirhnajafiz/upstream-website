@@ -6,6 +6,7 @@ use mvc\core\auth\Auth;
 use mvc\core\Message;
 use mvc\model\User;
 use mvc\model\Request;
+use mvc\controller\traits\Accept;
 
 /**
  * Admin controller manages the admin abilities.
@@ -13,6 +14,9 @@ use mvc\model\Request;
  */
 class AdminController extends BaseController
 {
+    // traits
+    use Accept;
+    
     /**
      * This method sends the user to requests page, is it was authenticate.
      * 

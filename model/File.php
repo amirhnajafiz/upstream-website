@@ -44,6 +44,11 @@ class File extends Model
     {
         return $this->delete($this->table_name, ['id' => $id]);
     }
+
+    public function makeValid($id)
+    {
+        return $this->update($this->table_name, ['valid' => 1], ['id' => $id]);
+    }
 }
 
 ?>

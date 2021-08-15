@@ -20,7 +20,7 @@ class Request extends Model
 
     public function getRequestMovies()
     {
-        $sth = $this->pdo->prepare("SELECT F.name, F.uploader, F.size, F.type, F.uploaddate
+        $sth = $this->pdo->prepare("SELECT F.name, F.uploader, F.size, F.type, F.uploaddate, R.id
                                     FROM $this->table_name as R JOIN file as F ON F.id = R.id");
         $sth->execute();
 
@@ -30,6 +30,11 @@ class Request extends Model
     public function insertRequest($id) 
     {
         return $this->insert($this->table_name, ['id' => $id]);
+    }
+
+    public function removeRequest($id)
+    {
+        return $this->delete($this->table_name, ['id' => $id]);
     }
 }
 
