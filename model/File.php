@@ -4,6 +4,7 @@ namespace mvc\model;
 
 use mvc\model\Model;
 use mvc\model\traits\Total;
+use mvc\model\traits\Upload;
 
 /**
  * File model is the file schema in our database.
@@ -13,6 +14,7 @@ class File extends Model
 {
     // traits
     use Total;
+    use Upload;
 
     public int $id;
     public string $name;

@@ -5,6 +5,7 @@ namespace mvc\controller;
 use mvc\controller\traits\Login;
 use mvc\controller\traits\Logout;
 use mvc\controller\traits\Register;
+use mvc\controller\traits\Upload;
 use mvc\controller\BaseController;
 use mvc\core\auth\Auth;
 use mvc\core\Message;
@@ -21,6 +22,7 @@ class UserController extends BaseController
     use Login;
     use Logout;
     use Register;
+    use Upload;
 
     /**
      * This method returns the dashboard if user is authenticated.

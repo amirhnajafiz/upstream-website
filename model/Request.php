@@ -26,6 +26,11 @@ class Request extends Model
 
         return $sth->fetchAll(\PDO::FETCH_OBJ);
     }
+
+    public function insertRequest($id) 
+    {
+        return $this->insert($this->table_name, ['id' => $id]);
+    }
 }
 
 ?>

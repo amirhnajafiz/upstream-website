@@ -35,6 +35,9 @@ class Routes
         $app->router->get('/dashboard', [UserController::class, 'index'])->name("dashboard");
         $app->router->get('/upload', [UserController::class, 'upload'])->name("upload");
 
+        // Web routes
+        $app->router->post('/upload', [UserController::class, 'uploadFile']);
+
         // Admin routes 
         $app->router->get('/requests', [AdminController::class, 'requests'])->name("requests");
         $app->router->get('/users', [AdminController::class, 'users'])->name("users");
