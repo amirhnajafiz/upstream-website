@@ -1,5 +1,9 @@
 # Up-Stream
 
+<p align="center">
+    <img src="./assets/demo.gif" width="800" />
+</p>
+
 This is the implementation of a full website based on PHP MVC.
 
 Using MySql database to create a website.
